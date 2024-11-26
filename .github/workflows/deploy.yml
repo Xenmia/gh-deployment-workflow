@@ -1,16 +1,18 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions
-on: [push]
+name: Changes to the index.html file
+run-name: ${{ github.actor }} has made changes to the index file
+on:
+  push:
+    paths:
+      - 'index.html'
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The Job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "Meow"
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "The ${{ github.repository }} repo has been cloned to the runner."
-      - name: List files in the repo
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "This job's status is ${{ job.status }}"
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  
+        publish_dir: ./
