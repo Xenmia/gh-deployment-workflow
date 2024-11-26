@@ -3,6 +3,8 @@ run-name: ${{ github.actor }} has made changes to the index file
 #Runs only when there are changes to the 'index.html' file
 on:
   push:
+    branches:
+      - 'main'
     paths:
       - 'index.html'
 jobs:
