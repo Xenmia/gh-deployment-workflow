@@ -1,18 +1,22 @@
 name: Changes to the index.html file
 run-name: ${{ github.actor }} has made changes to the index file
+#Runs only when there are changes to the 'index.html' file
 on:
   push:
     paths:
       - 'index.html'
 jobs:
   deploy:
+    #Sets up the enviroment (ubuntu latest)
     runs-on: ubuntu-latest
     steps:
+      #Checks the code(?)
     - name: Checkout code
-      uses: actions/checkout@v3
-
+      uses: actions/checkout@v4
+      #Deployes the repo to the GitHub Pages
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}  
+        #Its the whole root dir, since index.html is in it
         publish_dir: ./
