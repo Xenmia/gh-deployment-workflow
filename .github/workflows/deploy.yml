@@ -3,8 +3,7 @@ run-name: ${{ github.actor }} has made changes to the index file
 #Runs only when there are changes to the 'index.html' file
 on:
   push:
-    branches:
-      - 'main'
+    branches: [ main ]
     paths:
       - 'index.html'
 jobs:
@@ -15,10 +14,12 @@ jobs:
       #Checks the code(?)
     - name: Checkout code
       uses: actions/checkout@v4
-      #Deployes the repo to the GitHub Pages
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  
-        #Its the whole root dir, since index.html is in it
-        publish_dir: ./
+      
+    - name: Run a one-line script
+      run: echo "Hello, world!"
+
+    - name: Run a multi-line script
+      run: |
+        echo "Adding more features"
+        echo "Even more features"
+        echo "Meow"
